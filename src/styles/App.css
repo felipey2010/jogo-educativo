@@ -1,0 +1,10 @@
+.App {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background-image: url(../images/back-to-school.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
