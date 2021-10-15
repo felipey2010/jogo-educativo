@@ -1,26 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=Akronim&display=swap");
-
 .home-main {
-  width: 100%;
   height: 100vh;
+  width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
 .home-title {
   width: 100%;
-  color: white;
-  font-size: 3rem;
-  height: 54px;
   text-align: center;
-  font-family: "Akronim", cursive;
 }
 
-.home-main-container {
-  height: 100%;
+.home-title h1 {
+  font-size: 2.5em;
+  margin: 0.2em;
+}
+
+.home-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 32px;
+  flex-direction: column;
+}
+
+.home-container h2 {
+  font-size: 1.5em;
+  margin: 0.5em;
+}
+
+.start-button {
+  color: var(--button-color);
+  background-color: var(--button-background);
+  border: 1px solid var(--button-color);
+  outline: none;
+  border-radius: 50px;
+  width: 180px;
+  height: 54px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: all 0.3s ease 0s;
+}
+
+.start-button:hover {
+  background-color: var(--button-color);
   color: white;
 }
