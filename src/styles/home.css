@@ -46,3 +46,17 @@
   background-color: var(--button-color);
   color: white;
 }
+
+/* NameAndAgePage CSS */
+.input-user {
+  height: 24px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--color);
+  color: var(--color);
+  background-color: transparent;
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 20px;
+}
