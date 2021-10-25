@@ -9,6 +9,7 @@ export default function ButtonHome({ name }) {
     storeUserInfo,
     age,
     username,
+    restartGame,
   } = useContext(Game);
 
   function checkFunction() {
@@ -18,10 +19,14 @@ export default function ButtonHome({ name }) {
     }
 
     if (name === "Pronto") {
-      if (username !== " " && !isNaN(age)) {
+      if (username !== "" && !isNaN(age) && age.length !== 0) {
         setCurrentPage(currentPage + 1);
         storeUserInfo();
       }
+    }
+
+    if (name === "Reiniciar") {
+      restartGame();
     }
   }
 
