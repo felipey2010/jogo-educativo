@@ -10,6 +10,7 @@ export default function ButtonHome({ name }) {
     age,
     username,
     restartGame,
+    getRandomNumbers,
   } = useContext(Game);
 
   function checkFunction() {
@@ -19,7 +20,8 @@ export default function ButtonHome({ name }) {
     }
 
     if (name === "Pronto") {
-      if (username !== "" && !isNaN(age) && age.length !== 0) {
+      if (username !== "" && !isNaN(age) && age.length !== 0 && !age < 1) {
+        getRandomNumbers();
         setCurrentPage(currentPage + 1);
         storeUserInfo();
       }

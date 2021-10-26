@@ -19,6 +19,7 @@ export default function NameAndAgePage() {
           className="input-user"
           type="text"
           required
+          autoFocus
           placeholder="nome"
           value={username}
           onChange={e => setUsername(e.target.value)}

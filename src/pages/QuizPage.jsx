@@ -16,8 +16,13 @@ export default function QuizPage() {
     getRandomAnswers,
   } = useContext(Game);
 
+  let newArray = options.sort(function () {
+    return Math.random() - 0.5;
+  });
+
   useEffect(() => {
     getRandomAnswers();
+
     // eslint-disable-next-line
   }, [firstNumber, secondNumber]);
 
@@ -33,8 +38,8 @@ export default function QuizPage() {
           {firstNumber} {operation[level]} {secondNumber} = ?
         </p>
         <div className="answer-section">
-          {options.map(option => {
-            return <Answer value={option} key={option} />;
+          {newArray.map((option, index) => {
+            return <Answer value={option} key={index} />;
           })}
         </div>
       </div>

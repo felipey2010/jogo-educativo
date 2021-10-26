@@ -6,24 +6,46 @@ const GameContext = ({ children }) => {
   // const [user, setUser] = useState(
   //   JSON.parse(localStorage.getItem("game-user"))
   // );
-  const [username, setUsername] = useState("");
-  const [age, setAge] = useState(0);
+  const [username, setUsername] = useState(
+    localStorage.getItem("game-user-name") ?? ""
+  );
+  const [age, setAge] = useState(localStorage.getItem("game-user-age") ?? 0);
   const [loading, setLoading] = useState(false);
 
   // Game Assets
-  const [points, setPoints] = useState(0); //Points accumulated
+  const [points, setPoints] = useState(
+    localStorage.getItem("game-user-points") ?? 0
+  ); //Points accumulated
   const [chances, setChances] = useState(5); //Player has 5 chances for each stage
-  const operation = ["+", "-", "*", "/"]; //Array of the operations
+  const operation = ["+", "*", "-", "/"]; //Array of the operations
   const [notification, setNotification] = useState(""); //Use to show messages such as Game over
   const [currentPage, setCurrentPage] = useState(0);
   const [level, setLevel] = useState(0);
-  const [firstNumber, setFirstNumber] = useState(0);
-  const [secondNumber, setSecondNumber] = useState(0);
+  const [firstNumber, setFirstNumber] = useState(
+    1 + Math.floor(Math.random() * age)
+  );
+  const [secondNumber, setSecondNumber] = useState(
+    Math.floor(Math.random() * age)
+  );
   const [options, setOptions] = useState([]);
+  // const [counter, setCounter] = useState(0);
+
+  //Increase level
+  function checkPoints() {
+    if (points >= 0 && points <= 1250) {
+      setLevel(0);
+    } else if (points >= 1251 && points <= 3750) {
+      setLevel(1);
+    } else if (points >= 3751 && points <= 7500) {
+      setLevel(2);
+    } else if (points >= 7501) {
+      setLevel(3);
+    }
+  }
 
   //Get two random numbers
   function getRandomNumbers() {
-    setFirstNumber(1 + Math.floor(Math.random() * age));
+    setFirstNumber(Math.floor(Math.random() * age));
     setSecondNumber(Math.floor(Math.random() * age));
   }
 
@@ -43,7 +65,7 @@ const GameContext = ({ children }) => {
       setOptions(array => [...array, firstNumber / secondNumber]);
     }
 
-    for (var i = 1; i < 4; i++) {
+    for (var i = 1; i < 3; i++) {
       setOptions(array => [...array, Math.floor(Math.random() * (2 * age))]);
     }
   }
@@ -75,9 +97,9 @@ const GameContext = ({ children }) => {
   function losePoint(value) {
     if (value > points) {
       setPoints(0);
-      return;
+    } else {
+      setPoints(points - value);
     }
-    setPoints(points - value);
   }
 
   //Chances decrease
@@ -118,6 +140,7 @@ const GameContext = ({ children }) => {
       }
     }
     getRandomNumbers();
+    checkPoints();
     localStorage.setItem("game-user-points", points);
   }
 
@@ -136,15 +159,16 @@ const GameContext = ({ children }) => {
     return () => clearTimeout(timeoutId);
   }
 
-  function loadGameInfo() {
-    setUsername(localStorage.getItem("game-user-name") ?? "");
-    setAge(localStorage.getItem("game-user-age") ?? "");
-    setPoints(localStorage.getItem("game-user-points") ?? 0);
-  }
+  // function loadGameInfo() {
+  //   setUsername(localStorage.getItem("game-user-name") ?? "");
+  //   setAge(localStorage.getItem("game-user-age") ?? "");
+  //   setPoints(localStorage.getItem("game-user-points") ?? 0);
+  // }
 
   useEffect(() => {
-    loadGameInfo();
+    // loadGameInfo();
     getRandomNumbers();
+
     // eslint-disable-next-line
   }, []);
 
